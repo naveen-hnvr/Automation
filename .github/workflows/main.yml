@@ -3,12 +3,16 @@ on: [push]
 jobs:
  Cypress-Test:
    runs-on: ubuntu-latest
-   env:
-      UN: ${{ secrets.USERNAME }}
-      PW: ${{ secrets.PASSWORD }}
+  
    steps:
      - name: Checkout GitCode
        uses: actions/checkout@v3
+
+     - name: Write the cypress.env.json file 📝
+        # use quotes around the secret, as its value
+        # is simply inserted as a string into the command
+        run: |
+          echo '${{ secrets.CYPRESS_ENV_CI }}' > cypress.env.json
  
      - name: Run Cypress Test
        uses: cypress-io/github-action@v5
