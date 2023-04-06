@@ -3,6 +3,9 @@ on: [push]
 jobs:
  Cypress-Test:
    runs-on: ubuntu-latest
+   env:
+      UN: ${{ secrets.USERNAME }}
+      PW: ${{ secrets.PASSWORD }}
    steps:
      - name: Checkout GitCode
        uses: actions/checkout@v3
