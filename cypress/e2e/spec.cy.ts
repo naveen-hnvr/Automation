@@ -29,4 +29,15 @@ describe('Login with incorrect credential', () => {
     cy.url().should('include', '/home')
     cy.contains('Invalid Email or Password').should('be.visible')
   })
+
+})
+  describe('Login with incorrect credential', () => {
+    it('When user try to login with incorret credential,proper error message should display', () => {
+      cy.visit("/")
+      cy.get('input[placeholder="Email"]').type(Cypress.env('USERNAME'))
+      cy.get('#password').type(Cypress.env('INCORRECT'))
+      cy.get('input[type="submit"]').click()
+      cy.url().should('include', '/home')
+      cy.contains('Invalid Email or Password').should('be.visible')
+    })
 })
