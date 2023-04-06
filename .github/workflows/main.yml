@@ -7,12 +7,6 @@ jobs:
    steps:
      - name: Checkout GitCode
        uses: actions/checkout@v3
-
-     - name: Write the cypress.env.json file
-        # use quotes around the secret, as its value
-        # is simply inserted as a string into the command
-        run: |
-          echo ${{ secrets.CYPRESS_ENV_CI }} | base64 -d > cypress.env.json
  
      - name: Run Cypress Test
        uses: cypress-io/github-action@v5
