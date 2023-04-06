@@ -1,11 +1,13 @@
 describe('Login Test and validate page title', () => {
-
+   const UN = Cypress.env('USERNAME')
+   const PD = Cypress.env('PASSWORD')
+   const INC = Cypress.env('INCORRECT')
   before(() => {
     cy.visit("/")
   })
   beforeEach(() => {
-    cy.get('input[placeholder="Email"]').type(Cypress.env('USERNAME'))
-    cy.get('#password').type(Cypress.env('PASSWORD'))
+    cy.get('input[placeholder="Email"]').type(UN)
+    cy.get('#password').type(PD)
     cy.get('input[type="submit"]').click()
   })
 
@@ -15,29 +17,21 @@ describe('Login Test and validate page title', () => {
   })
 
   afterEach(() => {
-    cy.contains(Cypress.env('USERNAME')).click()
+    cy.contains(UN).click()
     cy.get('i.fa.fa-sign-out').click();
   })
 
 })
 describe('Login with incorrect credential', () => {
+  const UN = Cypress.env('USERNAME')
+   const PD = Cypress.env('PASSWORD')
+   const INC = Cypress.env('INCORRECT')
   it('When user try to login with incorret credential,proper error message should display', () => {
     cy.visit("/")
-    cy.get('input[placeholder="Email"]').type(Cypress.env('USERNAME'))
-    cy.get('#password').type(Cypress.env('INCORRECT'))
+    cy.get('input[placeholder="Email"]').type(UN)
+    cy.get('#password').type(INC)
     cy.get('input[type="submit"]').click()
     cy.url().should('include', '/home')
     cy.contains('Invalid Email or Password').should('be.visible')
   })
-
-})
-  describe('Login with incorrect credential', () => {
-    it('When user try to login with incorret credential,proper error message should display', () => {
-      cy.visit("/")
-      cy.get('input[placeholder="Email"]').type(Cypress.env('USERNAME'))
-      cy.get('#password').type(Cypress.env('INCORRECT'))
-      cy.get('input[type="submit"]').click()
-      cy.url().should('include', '/home')
-      cy.contains('Invalid Email or Password').should('be.visible')
-    })
 })
